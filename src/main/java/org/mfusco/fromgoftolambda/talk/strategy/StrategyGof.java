@@ -1,5 +1,7 @@
 package org.mfusco.fromgoftolambda.talk.strategy;
 
+import java.util.Optional;
+
 public class StrategyGof {
 
     interface TextFormatter {
@@ -53,16 +55,24 @@ public class StrategyGof {
             this.textFormatter = textFormatter;
         }
 
-        public void publishText(String text) {
-            if (textFormatter.filter( text )) {
-                System.out.println( textFormatter.format( text ) );
-            }
+        public Optional<String> publishText(String text) {
+            return textFormatter.filter( text ) ?
+                Optional.of(textFormatter.format( text )) :
+                Optional.empty();
         }
     }
 
     public static void main( String[] args ) {
         TextEditor textEditor = new TextEditor( new ErrorTextFormatter() );
-        textEditor.publishText( "ERROR - something bad happened" );
-        textEditor.publishText( "DEBUG - I'm here" );
+        log(
+            textEditor.publishText( "ERROR - something bad happened" )
+        );
+        log(
+            textEditor.publishText( "DEBUG - I'm here" )
+        );
+    }
+
+    private static void log(Optional<String> text) {
+        text.ifPresent(System.out::println);
     }
 }

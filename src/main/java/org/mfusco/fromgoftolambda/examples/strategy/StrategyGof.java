@@ -19,8 +19,8 @@ public class StrategyGof {
             return text;
         }
     }
-
     public static class ErrorTextFormatter implements TextFormatter {
+
 
         @Override
         public boolean filter( String text ) {
