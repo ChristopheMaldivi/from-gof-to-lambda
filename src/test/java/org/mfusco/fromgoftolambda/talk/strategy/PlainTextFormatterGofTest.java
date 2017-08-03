@@ -6,11 +6,11 @@ import org.mfusco.fromgoftolambda.examples.strategy.StrategyGof.PlainTextFormatt
 
 public class PlainTextFormatterGofTest {
 
-    private String text = "my wonderful test will not be filtered";
 
     @Test
     public void filter_nothing() {
         // given
+        String text = "my wonderful test will not be filtered";
         PlainTextFormatter formatter = new PlainTextFormatter();
 
         // when
@@ -23,6 +23,7 @@ public class PlainTextFormatterGofTest {
     @Test
     public void format_nothing() {
         // given
+        String text = "my wonderful test will not be formatted";
         PlainTextFormatter formatter = new PlainTextFormatter();
 
         // when

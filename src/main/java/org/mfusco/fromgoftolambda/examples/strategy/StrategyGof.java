@@ -1,6 +1,10 @@
 package org.mfusco.fromgoftolambda.examples.strategy;
 
+import org.mfusco.fromgoftolambda.examples.Console;
+
 public class StrategyGof {
+
+    public static final int LONG_TEXT_MIN_LENGTH = 20;
 
     interface TextFormatter {
         boolean filter(String text);
@@ -37,7 +41,7 @@ public class StrategyGof {
 
         @Override
         public boolean filter( String text ) {
-            return text.length() < 20;
+            return text.length() < LONG_TEXT_MIN_LENGTH;
 
         }
         @Override
@@ -53,16 +57,24 @@ public class StrategyGof {
             this.textFormatter = textFormatter;
         }
 
-        public void publishText(String text) {
+        public void publishText(String text, Console console) {
             if (textFormatter.filter( text )) {
-                System.out.println( textFormatter.format( text ) );
+                console.log(textFormatter.format(text));
             }
         }
     }
 
     public static void main( String[] args ) {
         TextEditor textEditor = new TextEditor( new ErrorTextFormatter() );
-        textEditor.publishText( "ERROR - something bad happened" );
-        textEditor.publishText( "DEBUG - I'm here" );
+        Console console = new ConsoleImpl();
+        textEditor.publishText( "ERROR - something bad happened", console);
+        textEditor.publishText( "DEBUG - I'm here", console );
+    }
+
+    private static class ConsoleImpl implements Console {
+        @Override
+        public void log(String message) {
+            System.out.println(message);
+        }
     }
 }

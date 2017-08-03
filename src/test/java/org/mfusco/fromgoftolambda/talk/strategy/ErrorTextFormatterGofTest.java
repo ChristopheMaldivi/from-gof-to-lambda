@@ -6,15 +6,14 @@ import org.mfusco.fromgoftolambda.examples.strategy.StrategyGof.ErrorTextFormatt
 
 public class ErrorTextFormatterGofTest {
 
-    String errorText = "ERROR I am an error";
-
     @Test
     public void filter_error() {
         // given
         ErrorTextFormatter formatter = new ErrorTextFormatter();
+        String expectedErrorText = "ERROR I am an error";
 
         // when
-        boolean filtered = formatter.filter(errorText);
+        boolean filtered = formatter.filter(expectedErrorText);
 
         // then
         Assertions.assertThat(filtered).isTrue();
@@ -34,15 +33,16 @@ public class ErrorTextFormatterGofTest {
     }
 
     @Test
-    public void format_error() {
+    public void format_error_to_upper_case() {
         // given
         ErrorTextFormatter formatter = new ErrorTextFormatter();
-        String expectedText = "ERROR I AM AN ERROR";
+        String errorText = "ERROR I am an error";
+        String expectedErrorText = "ERROR I AM AN ERROR";
 
         // when
         String formatted = formatter.format(errorText);
 
         // then
-        Assertions.assertThat(formatted).isEqualTo(expectedText);
+        Assertions.assertThat(formatted).isEqualTo(expectedErrorText);
     }
 }

@@ -1,12 +1,14 @@
 package org.mfusco.fromgoftolambda.talk.strategy;
 
-import java.util.Optional;
+import org.mfusco.fromgoftolambda.talk.Console;
 
 public class StrategyGof {
 
+    public static final int LONG_TEXT_MIN_LENGTH = 20;
+
     interface TextFormatter {
-        boolean filter( String text );
-        String format( String text );
+        boolean filter(String text);
+        String format(String text);
     }
 
     public static class PlainTextFormatter implements TextFormatter {
@@ -21,8 +23,8 @@ public class StrategyGof {
             return text;
         }
     }
-
     public static class ErrorTextFormatter implements TextFormatter {
+
 
         @Override
         public boolean filter( String text ) {
@@ -39,7 +41,7 @@ public class StrategyGof {
 
         @Override
         public boolean filter( String text ) {
-            return text.length() < 20;
+            return text.length() < LONG_TEXT_MIN_LENGTH;
 
         }
         @Override
@@ -55,24 +57,24 @@ public class StrategyGof {
             this.textFormatter = textFormatter;
         }
 
-        public Optional<String> publishText(String text) {
-            return textFormatter.filter( text ) ?
-                Optional.of(textFormatter.format( text )) :
-                Optional.empty();
+        public void publishText(String text, Console console) {
+            if (textFormatter.filter( text )) {
+                console.log(textFormatter.format(text));
+            }
         }
     }
 
     public static void main( String[] args ) {
         TextEditor textEditor = new TextEditor( new ErrorTextFormatter() );
-        log(
-            textEditor.publishText( "ERROR - something bad happened" )
-        );
-        log(
-            textEditor.publishText( "DEBUG - I'm here" )
-        );
+        Console console = new ConsoleImpl();
+        textEditor.publishText( "ERROR - something bad happened", console);
+        textEditor.publishText( "DEBUG - I'm here", console );
     }
 
-    private static void log(Optional<String> text) {
-        text.ifPresent(System.out::println);
+    private static class ConsoleImpl implements Console {
+        @Override
+        public void log(String message) {
+            System.out.println(message);
+        }
     }
 }

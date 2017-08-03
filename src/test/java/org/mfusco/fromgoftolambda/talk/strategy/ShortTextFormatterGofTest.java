@@ -2,16 +2,23 @@ package org.mfusco.fromgoftolambda.talk.strategy;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+import org.mfusco.fromgoftolambda.examples.strategy.StrategyGof;
 import org.mfusco.fromgoftolambda.examples.strategy.StrategyGof.ShortTextFormatter;
 
 public class ShortTextFormatterGofTest {
 
-    String shortText = "ABCDEFGHIJKLMNOPQRS";
-    String longText = "ABCDEFGHIJKLMNOPQRST";
+    @Test
+    public void long_text_min_length_should_be_20() {
+        // given
+        // when
+        // then
+        Assertions.assertThat(StrategyGof.LONG_TEXT_MIN_LENGTH).isEqualTo(20);
+    }
 
     @Test
-    public void filter_short_text() {
+    public void filter_short_text_less_than_LONG_TEXT_MIN_LENGTH_chars() {
         // given
+        String shortText = "ABCDEFGHIJKLMNOPQRS";
         ShortTextFormatter formatter = new ShortTextFormatter();
 
         // when
@@ -22,8 +29,9 @@ public class ShortTextFormatterGofTest {
     }
 
     @Test
-    public void do_not_filter_long_text() {
+    public void do_not_filter_long_text_longer_or_equal_to_LONG_TEXT_MIN_LENGTH_chars() {
         // given
+        String longText = "ABCDEFGHIJKLMNOPQRST";
         ShortTextFormatter formatter = new ShortTextFormatter();
 
         // when
@@ -36,6 +44,7 @@ public class ShortTextFormatterGofTest {
     @Test
     public void format_short_text() {
         // given
+        String shortText = "ABCDEFGHIJKLMNOPQRS";
         ShortTextFormatter formatter = new ShortTextFormatter();
         String expectedText = "abcdefghijklmnopqrs";
 
