@@ -46,5 +46,3 @@ public class TextEditorGofTest {
         Assertions.assertThat(console.lastLog).isNull();
     }
 }
-
-Bernard Abondance

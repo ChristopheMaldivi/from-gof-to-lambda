@@ -2,7 +2,7 @@ package org.mfusco.fromgoftolambda.talk.strategy;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import org.mfusco.fromgoftolambda.examples.strategy.StrategyGof.PlainTextFormatter;
+import org.mfusco.fromgoftolambda.talk.strategy.StrategyGof.PlainTextFormatter;
 
 public class PlainTextFormatterGofTest {
 

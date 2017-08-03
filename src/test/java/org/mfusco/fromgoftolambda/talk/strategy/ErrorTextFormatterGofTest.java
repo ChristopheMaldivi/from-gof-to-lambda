@@ -2,14 +2,13 @@ package org.mfusco.fromgoftolambda.talk.strategy;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import org.mfusco.fromgoftolambda.examples.strategy.StrategyGof.ErrorTextFormatter;
 
 public class ErrorTextFormatterGofTest {
 
     @Test
     public void filter_error() {
         // given
-        ErrorTextFormatter formatter = new ErrorTextFormatter();
+        StrategyGof.ErrorTextFormatter formatter = new StrategyGof.ErrorTextFormatter();
         String expectedErrorText = "ERROR I am an error";
 
         // when
@@ -22,7 +21,7 @@ public class ErrorTextFormatterGofTest {
     @Test
     public void do_not_filter_normal_text() {
         // given
-        ErrorTextFormatter formatter = new ErrorTextFormatter();
+        StrategyGof.ErrorTextFormatter formatter = new StrategyGof.ErrorTextFormatter();
         String text = "I am not an error";
 
         // when
@@ -35,7 +34,7 @@ public class ErrorTextFormatterGofTest {
     @Test
     public void format_error_to_upper_case() {
         // given
-        ErrorTextFormatter formatter = new ErrorTextFormatter();
+        StrategyGof.ErrorTextFormatter formatter = new StrategyGof.ErrorTextFormatter();
         String errorText = "ERROR I am an error";
         String expectedErrorText = "ERROR I AM AN ERROR";
 
